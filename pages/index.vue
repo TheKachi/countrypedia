@@ -4,14 +4,23 @@
 
     <div class="grid grid-cols-12 lg:justify-between mb-24 lg:mb-40">
       <!-- Search -->
+      <!-- todo: convert to a component usable in slug too -->
       <div class="col-span-12 lg:col-span-5">
         <div
           class="bg-white dark:bg-slate text-gray dark:text-white shadow rounded py-12 pl-28 pr-12 flex items-center gap-x-24"
         >
           <i class="fas fa-search"></i>
 
-          <input
+          <!-- <input
             @keyup.enter="$fetch"
+            type="text"
+            placeholder="Search for a country..."
+            aria-label="Search for a country"
+            v-model="searchText"
+            class="outline-none w-full bg-white dark:bg-slate"
+          /> -->
+
+          <input
             type="text"
             placeholder="Search for a country..."
             aria-label="Search for a country"
@@ -66,21 +75,21 @@
 
     <!-- Loading  -->
     <Loading v-if="$fetchState.pending" />
+
+    <!-- Error -->
     <div v-if="$fetchState.error">
       Oops. It appears there's no country named {{ searchText }}
     </div>
 
-    <!--All Countries  -->
+    <!--Success: All Countries  -->
     <div
       v-else
       class="grid lg:grid-cols-4 2xl:grid-cols-5 gap-40 lg:gap-64 px-40 lg:px-0"
     >
-      <div class="" v-for="(country, i) in countries" :key="i">
+      <div class="" v-for="(country, i) in filteredCountries" :key="i">
         <CountryCard :country="country" />
-        <!-- </NuxtLink> -->
       </div>
     </div>
-    <!-- <pre>{{ countries }}</pre> -->
   </div>
 </template>
 
@@ -160,7 +169,13 @@ export default {
     },
   },
 
-  computed: {},
+  computed: {
+    filteredCountries() {
+      return this.countries.filter((country) =>
+        country.name.match(this.searchText)
+      );
+    },
+  },
 };
 </script>
 

@@ -69,9 +69,8 @@
         >
           <p>Border&nbsp;Countries:</p>
           <ul class="flex flex-wrap gap-x-4 gap-y-16">
-            <li v-for="(country, i) in country.borders" :key="i">
-              <!-- todo: link to border country  -->
-              <BorderCountryChip :code="country"/>
+            <li v-for="(countryCode, i) in country.borders" :key="i">
+              <BorderCountryChip :countryCode="countryCode" />
             </li>
           </ul>
         </div>
@@ -84,28 +83,22 @@
 import Loading from "@/components/Loading.vue";
 export default {
   name: "CountryDetails",
+
   head() {
     return {
       title: this.country.name,
     };
   },
+
   async asyncData({ $axios, params }) {
     const country = await $axios.$get(`/alpha/${params.slug}`);
     return { country };
   },
 
   computed: {
-    countryName() {
-      return this.country.name;
-    },
-
     population() {
       return this.country.population.toLocaleString("en-US");
     },
-
-    // borderCountryName() {
-    //   this.borderCountryNames =
-    // }
   },
 
   methods: {},
