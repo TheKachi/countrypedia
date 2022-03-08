@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <pre>{{ countries }}</pre>
+    <!-- <pre>{{ countries }}</pre> -->
 
     <div class="grid grid-cols-12 lg:justify-between mb-24 lg:mb-40">
       <!-- Search -->

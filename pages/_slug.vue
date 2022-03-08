@@ -71,12 +71,7 @@
           <ul class="flex flex-wrap gap-x-4 gap-y-16">
             <li v-for="(country, i) in country.borders" :key="i">
               <!-- todo: link to border country  -->
-              <NuxtLink
-                :to="`/${country}`"
-                class="bg-white dark:bg-slate border border-gray dark:border-slate rounded px-12 py-4"
-              >
-                {{ country }}
-              </NuxtLink>
+              <BorderCountryChip :code="country"/>
             </li>
           </ul>
         </div>
