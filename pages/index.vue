@@ -36,9 +36,8 @@
           :regions="regions"
           @change="filterByRegion(region)"
         /> -->
-
         <select v-model="region" @change="filterByRegion(region)">
-          <option selected class="text-black">Filter By Region</option>
+          <option selected>Filter By Region</option>
           <option v-for="option in regions" :key="option" :value="option">
             {{ option }}
           </option>
