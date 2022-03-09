@@ -55,7 +55,7 @@ module.exports = {
     extend: {},
   },
 
-  // plugins: [require("tailwindcss-dark-mode")()],
+  // plugins: [require("@tailwindcss/forms")],
 
   // variants: {
   //   backgroundColor: [

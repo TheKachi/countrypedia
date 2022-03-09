@@ -3,7 +3,7 @@
     <NavBar class="px-20 lg:px-64 py-16" />
     <Nuxt
       keep-alive
-      class="bg-light dark:bg-dark lg:px-64 py-96 min-h-screen"
+      class="bg-light dark:bg-dark px-20 lg:px-64 py-96 min-h-screen"
     />
   </div>
 </template>

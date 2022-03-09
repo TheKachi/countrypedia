@@ -1,35 +1,23 @@
 <template>
-  <div class="home">
-    <!-- <pre>{{ countries }}</pre> -->
-
-    <div class="grid grid-cols-12 lg:justify-between mb-24 lg:mb-40">
+  <section>
+    <div class="grid grid-cols-12 gap-y-28 lg:justify-between mb-24 lg:mb-40">
       <!-- Search -->
-      <!-- todo: convert to a component usable in slug too -->
       <div class="col-span-12 lg:col-span-5">
         <div
           class="bg-white dark:bg-slate text-gray dark:text-white shadow rounded py-12 pl-28 pr-12 flex items-center gap-x-24"
         >
           <i class="fas fa-search"></i>
 
-          <!-- <input
-            @keyup.enter="$fetch"
-            type="text"
-            placeholder="Search for a country..."
-            aria-label="Search for a country"
-            v-model="searchText"
-            class="outline-none w-full bg-white dark:bg-slate"
-          /> -->
-
           <input
             type="text"
-            placeholder="Search for a country..."
-            aria-label="Search for a country"
-            v-model="searchText"
+            placeholder="Search for a country by name or capital"
+            aria-label="Search for a country by name or capital"
+            v-model="searchQuery"
             class="outline-none w-full bg-white dark:bg-slate"
           />
 
           <button
-            v-show="searchText !== ''"
+            v-show="searchQuery !== ''"
             @click="clearSearch"
             class="ml-auto"
           >
@@ -40,64 +28,55 @@
 
       <!-- Filter  -->
       <div class="col-span-6 lg:col-span-2 lg:col-end-13">
-        <!-- filter component  -->
-        <div class="relative">
-          <!-- filter button -->
-          <div
-            @click="showDropdown = !showDropdown"
-            class="bg-white dark:bg-slate text-black dark:text-white shadow rounded p-16 flex justify-between items-center cursor-pointer"
-          >
-            <span> Filter by Region</span>
-            <i
-              class="fas fa-chevron-down ml-auto"
-              aria-label="toggle filter dropdown"
-            ></i>
-          </div>
+        <!-- Insert filter component here  -->
+        <!-- @filter-by-region="filterByRegion"  -->
 
-          <!-- dropdown  -->
-          <div
-            v-if="showDropdown"
-            class="bg-white dark:bg-slate shadow rounded mt-4 absolute z-10 w-full"
-          >
-            <!-- todo: convert this to a select element -->
-            <div
-              :key="region"
-              v-for="region in regions"
-              @click="filterRegion(region)"
-              class="text-black dark:text-white rounded py-8 px-16 cursor-pointer hover:bg-gray hover:text-white"
-            >
-              {{ region }}
-            </div>
-          </div>
-        </div>
+        <!-- <Filters
+          :region="region"
+          :regions="regions"
+          @change="filterByRegion(region)"
+        /> -->
+
+        <select
+          class="bg-white dark:bg-slate shadow rounded w-full"
+          v-model="region"
+          @change="filterByRegion(region)"
+        >
+          <option selected>Filter By Region</option>
+          <option v-for="option in regions" :key="option" :value="option">
+            {{ option }}
+          </option>
+        </select>
       </div>
     </div>
 
-    <!-- Loading  -->
+    <!-- Fetching Countries  -->
     <Loading v-if="$fetchState.pending" />
 
-    <!-- Error -->
-    <div v-if="$fetchState.error">
-      Oops. It appears there's no country named {{ searchText }}
-    </div>
-
     <!--Success: All Countries  -->
-    <div
-      v-else
-      class="grid lg:grid-cols-4 2xl:grid-cols-5 gap-40 lg:gap-64 px-40 lg:px-0"
-    >
-      <div class="" v-for="(country, i) in filteredCountries" :key="i">
-        <CountryCard :country="country" />
+    <div v-else>
+      <div
+        class="grid lg:grid-cols-4 2xl:grid-cols-5 gap-40 lg:gap-64 px-28 lg:px-0"
+      >
+        <div class="" v-for="(country, i) in filteredCountries" :key="i">
+          <CountryCard :country="country" />
+        </div>
+      </div>
+
+      <div v-if="filteredCountries.length === 0">
+        No countries match your search
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
 import CountryCard from "~/components/CountryCard.vue";
 import Loading from "../components/Loading.vue";
+// import Filters from "../components/Filters.vue";
 export default {
   name: "CountriesHomePage",
+
   head() {
     return {
       title: "REST API Countries",
@@ -117,62 +96,48 @@ export default {
       ],
     };
   },
+
   components: {
     CountryCard,
     Loading,
+    // Filters,
   },
+
   data() {
     return {
       countries: [],
+      searchQuery: "",
+      region: "",
       regions: ["Africa", "America", "Asia", "Europe", "Oceania"],
-      searchText: "",
-      showDropdown: false,
     };
   },
+
   async fetch() {
-    if (this.searchText === "") {
-      await this.getAllCountries();
-      return;
-    }
-    await this.searchCountry();
+    this.countries = await this.$axios.$get("/all");
   },
 
-  fetchDelay: 1000,
-
   methods: {
-    async getAllCountries() {
-      const res = await this.$axios.$get("/all");
-      this.countries = res;
-    },
-
-    async filterRegion(region) {
-      this.showDropdown = false;
-      // this.loading = true
-      // const res = await this.$axios.$get(`/continent/${region}`);
-      console.log(res);
-      // this.loading = false
-      // this.countries = res.data;
-      window.scrollTo(0, 0);
-    },
-
-    async searchCountry() {
-      const res = await this.$axios.$get(
-        `/name/${this.searchText}?fullText=true`
+    filterByRegion(region) {
+      this.countries = this.countries.filter(
+        (country) => country.region === region
       );
-      this.countries = res;
-      this.searchText = "";
+      // todo: reset countries back to all countries after every filter
     },
 
     clearSearch() {
-      this.searchText = "";
-      this.getAllCountries();
+      this.searchQuery = "";
     },
   },
 
   computed: {
     filteredCountries() {
-      return this.countries.filter((country) =>
-        country.name.match(this.searchText)
+      const searchRegex = new RegExp(this.searchQuery, "i");
+      if (this.searchQuery === "") {
+        return this.countries;
+      }
+      return this.countries.filter(
+        (country) =>
+          searchRegex.test(country.name) || searchRegex.test(country.capital)
       );
     },
   },
@@ -180,7 +145,7 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-.home {
+section {
   @apply text-sm;
 }
 </style>

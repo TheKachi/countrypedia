@@ -1,14 +1,15 @@
 <template>
-  <div class="px-16 lg:px-0 details text-black dark:text-white">
+  <section class="text-black dark:text-white">
     <!-- <pre>{{ country }}</pre> -->
 
     <NuxtLink
       to="/"
-      class="bg-white dark:bg-slate shadow-lg shadow-gray rounded px-20 py-8"
+      class="bg-white dark:bg-slate shadow-lg shadow-gray dark:shadow-slate rounded px-20 py-8"
     >
       <i class="fas fa-long-arrow-alt-left"></i>
       <span class="font-light">Back</span>
     </NuxtLink>
+
     <div
       class="grid grid-cols-1 md:grid-cols-12 gap-40 md:gap-0 mt-40 md:mt-64 md:items-center"
     >
@@ -17,7 +18,7 @@
       </div>
 
       <div class="md:col-start-8 md:col-end-13">
-        <h1 class="my-20 font-extrabold text-2xl lg:text-4xl">
+        <h1 class="my-20 font-extrabold text-xl lg:text-4xl">
           {{ country.name }}
         </h1>
 
@@ -70,13 +71,13 @@
           <p>Border&nbsp;Countries:</p>
           <ul class="flex flex-wrap gap-x-4 gap-y-16">
             <li v-for="(countryCode, i) in country.borders" :key="i">
-              <BorderCountryChip :countryCode="countryCode" />
+              <BorderCountry :countryCode="countryCode" />
             </li>
           </ul>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -108,7 +109,7 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-.details {
+section {
   @apply text-base;
 }
 

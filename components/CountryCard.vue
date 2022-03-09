@@ -10,7 +10,9 @@
       />
 
       <div class="px-24 py-24">
-        <h1 class="mt-20 mb-16 font-extrabold text-base">{{ country.name }}</h1>
+        <h1 class="mt-20 mb-16 font-extrabold text-xl lg:text-base">
+          {{ slice(country.name) }}
+        </h1>
         <p>
           Population: <span>{{ population(country.population) }}</span>
         </p>
@@ -34,6 +36,11 @@ export default {
   methods: {
     population(num) {
       return num.toLocaleString("en-US");
+    },
+
+    slice(str) {
+      if (str.length <= 24) return str;
+      return str.slice(0, 21) + "...";
     },
   },
 };

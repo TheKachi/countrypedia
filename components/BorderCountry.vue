@@ -1,7 +1,7 @@
 <template>
   <NuxtLink
     :to="`/${countryCode}`"
-    class="bg-white dark:bg-slate flex gap-8 items-center justify-centerborder border-gray dark:border-slate rounded px-12 py-4"
+    class="bg-white dark:bg-slate flex gap-8 items-center justify-center border border-gray dark:border-slate rounded px-12 py-4"
   >
     {{ borderCountryName }}
   </NuxtLink>
