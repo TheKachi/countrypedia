@@ -10,6 +10,9 @@
   p {
     @apply leading-relaxed;
   }
+  select {
+    @apply bg-white dark:bg-slate text-black dark:text-white shadow rounded py-8 px-16 w-full;
+  }
 }
 
 .page-enter-active,
