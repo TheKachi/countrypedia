@@ -4,7 +4,7 @@
 
     <NuxtLink
       to="/"
-      class="bg-white dark:bg-slate shadow-lg shadow-gray dark:shadow-slate rounded px-20 py-8"
+      class="bg-white dark:bg-slate shadow shadow-gray dark:shadow-slate rounded px-20 py-8"
     >
       <i class="fas fa-long-arrow-alt-left"></i>
       <span class="font-light">Back</span>
