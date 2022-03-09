@@ -28,25 +28,7 @@
 
       <!-- Filter  -->
       <div class="col-span-6 lg:col-span-2 lg:col-end-13">
-        <!-- Insert filter component here  -->
-        <!-- @filter-by-region="filterByRegion"  -->
-
-        <!-- <Filters
-          :region="region"
-          :regions="regions"
-          @change="filterByRegion(region)"
-        /> -->
-
-        <select
-          class="bg-white dark:bg-slate shadow rounded w-full"
-          v-model="region"
-          @change="filterByRegion(region)"
-        >
-          <option selected>Filter By Region</option>
-          <option v-for="option in regions" :key="option" :value="option">
-            {{ option }}
-          </option>
-        </select>
+        <Filters :list="regions" v-model="region"/>
       </div>
     </div>
 
@@ -73,7 +55,7 @@
 <script>
 import CountryCard from "~/components/CountryCard.vue";
 import Loading from "../components/Loading.vue";
-// import Filters from "../components/Filters.vue";
+import Filters from "../components/Filters.vue";
 export default {
   name: "CountriesHomePage",
 
@@ -100,7 +82,7 @@ export default {
   components: {
     CountryCard,
     Loading,
-    // Filters,
+    Filters,
   },
 
   data() {
