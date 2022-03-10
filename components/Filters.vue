@@ -1,40 +1,27 @@
 <template>
-  <div class="relative bg-white py-8 shadow-md rounded-md">
-    <!-- this one pull the list out -->
-    <div @click="open = true" class="flex cursor-pointer px-8">
-      <!-- display -->
-      <p class="flex-grow">{{ value.trim() || placeholder }}</p>
-      <p>v</p>
+  <div class="relative">
+    <div
+      @click="toggleDropdown"
+      class="bg-white dark:bg-slate text-dark dark:text-white py-8 shadow rounded flex items-center justify-between cursor-pointer px-12"
+    >
+      {{ title }}
+      <i class="fas fa-chevron-down"></i>
     </div>
 
-    <!-- this is the list -->
-    <div
+    <!-- Dropdown -->
+    <ul
       v-if="open"
-      class="absolute cursor-pointer w-full top-0 rounded-md p-4 shadow-md bg-white"
+      class="absolute bg-white dark:bg-slate mt-8 py-4 cursor-pointer w-full rounded shadow"
     >
-      <!-- this is the list heading
-        clicking the heading reverts to default
-       -->
-      <div class="flex px-4 py-8">
-        <h1
-          @click="$emit('input', ''), (open = false)"
-          class="font-medium flex-grow"
-        >
-          {{ title }}
-        </h1>
-        <button @click="open = false">x</button>
-      </div>
-
-      <!-- this is the actual list :D -->
-      <div
+      <li
         v-for="item in list"
         :key="item"
         @click="$emit('input', item), (open = false)"
-        class="p-4 hover:bg-slate hover:bg-opacity-10 text-dark rounded-md"
+        class="hover:bg-slate hover:bg-opacity-10 text-dark dark:text-white px-12 py-4"
       >
         {{ item }}
-      </div>
-    </div>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -43,7 +30,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: "Select item",
+      default: "Filter by Region",
     },
     value: {
       type: String,
@@ -62,5 +49,11 @@ export default {
   data: () => ({
     open: false,
   }),
+
+  methods: {
+    toggleDropdown() {
+      this.open = !this.open;
+    },
+  },
 };
 </script>

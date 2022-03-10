@@ -45,7 +45,10 @@
         </div>
       </div>
 
-      <div v-if="filteredCountries.length === 0">
+      <div
+        v-if="filteredCountries.length === 0"
+        class="text-black dark:text-white"
+      >
         No countries match your search
       </div>
     </div>
@@ -90,13 +93,14 @@ export default {
       countries: [],
       searchQuery: "",
       region: "",
-      regions: ["Africa", "America", "Asia", "Europe", "Oceania"],
+      regions: ["Africa", "Americas", "Asia", "Europe", "Oceania"],
     };
   },
 
   async fetch() {
     this.countries = await this.$axios.$get("/all");
   },
+
   methods: {
     clearSearch() {
       this.searchQuery = "";
@@ -105,25 +109,23 @@ export default {
 
   computed: {
     filteredCountries() {
-      // on default we have all countries
-      let res = this.countries;
+      // All countries
+      let display = this.countries;
 
-      // searching.
-      // if searching has a value the filter content
-      const searchRegex = new RegExp(this.searchQuery, "i");
+      // Search
       if (this.searchQuery !== "") {
-        res = res.filter(
+        const searchRegex = new RegExp(this.searchQuery, "i");
+        display = display.filter(
           (country) =>
             searchRegex.test(country.name) || searchRegex.test(country.capital)
         );
       }
 
-      // filtering
-      // if filtering is avialable filter the result further
+      // Filter
       if (this.region !== "")
-        return res.filter((country) => country.region === this.region);
+        return display.filter((country) => country.region === this.region);
 
-      return res;
+      return display;
     },
   },
 };
