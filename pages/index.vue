@@ -97,15 +97,7 @@ export default {
   async fetch() {
     this.countries = await this.$axios.$get("/all");
   },
-
   methods: {
-    filterByRegion(region) {
-      this.countries = this.countries.filter(
-        (country) => country.region === region
-      );
-      // todo: reset countries back to all countries after every filter
-    },
-
     clearSearch() {
       this.searchQuery = "";
     },
@@ -113,14 +105,27 @@ export default {
 
   computed: {
     filteredCountries() {
+      // on default we have all countries
+      let res = this.countries
+      
+      // searching.
+      // if searching has a value the filter content
       const searchRegex = new RegExp(this.searchQuery, "i");
-      if (this.searchQuery === "") {
-        return this.countries;
+      if (this.searchQuery !== "") {
+        res = res.filter(
+          (country) =>
+            searchRegex.test(country.name) || searchRegex.test(country.capital)
+        );
       }
-      return this.countries.filter(
-        (country) =>
-          searchRegex.test(country.name) || searchRegex.test(country.capital)
-      );
+
+      // filtering
+      // if filtering is avialable filter the result further
+      if (this.region !== "")
+        return res.filter(
+          (country) => country.region === this.region
+        );
+
+      return res
     },
   },
 };
