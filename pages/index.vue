@@ -40,7 +40,7 @@
       <div
         class="grid lg:grid-cols-4 2xl:grid-cols-5 gap-40 lg:gap-64 px-28 lg:px-0"
       >
-        <div class="" v-for="(country, i) in filteredCountries" :key="i">
+        <div class="" v-for="(country, i) in filteredCountries" :key="i" v-once>
           <CountryCard :country="country" />
         </div>
       </div>

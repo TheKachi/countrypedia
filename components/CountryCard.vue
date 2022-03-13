@@ -10,7 +10,7 @@
       />
 
       <div class="px-24 py-24">
-        <h1 class="mt-20 mb-16 font-extrabold text-xl lg:text-base">
+        <h1 class="mb-16 font-extrabold text-xl lg:text-base">
           {{ slice(country.name) }}
         </h1>
         <p>
