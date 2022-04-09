@@ -1,5 +1,4 @@
 export default {
-  // Target: https://go.nuxtjs.dev/config-target
   target: "static",
 
   ssr: false,
@@ -7,7 +6,6 @@ export default {
     fallback: true,
   },
 
-  // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: "country-api",
     htmlAttrs: {
@@ -27,28 +25,24 @@ export default {
         href: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css",
       },
     ],
+    link: [
+      {
+        rel: "preload",
+        href: "https://res.cloudinary.com/thekachi/image/upload/v1647533832/Screen_Shot_2022-03-17_at_5.13.58_PM_zm7r2b.png",
+      },
+    ],
   },
 
-  // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
 
-  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: ["@/plugins/axios"],
 
-  // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [
-    // https://go.nuxtjs.dev/tailwindcss
-    "@nuxtjs/tailwindcss",
-    "@nuxtjs/color-mode",
-  ],
+  buildModules: ["@nuxtjs/tailwindcss", "@nuxtjs/color-mode"],
 
-  // Modules: https://go.nuxtjs.dev/config-modules
   modules: ["@nuxtjs/axios"],
 
-  // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 
   axios: {
@@ -58,8 +52,4 @@ export default {
   colorMode: {
     classSuffix: "",
   },
-
-  // purgeCSS: {
-  //   whitelist: ["dark-mode"],
-  // },
 };
