@@ -2,13 +2,13 @@
   <section class="text-black dark:text-white">
     <!-- <pre>{{ country }}</pre> -->
 
-    <NuxtLink
+    <nuxt-link
       to="/"
       class="bg-white dark:bg-slate shadow shadow-gray dark:shadow-slate rounded px-20 py-8"
     >
       <i class="fas fa-long-arrow-alt-left"></i>
       <span class="font-light">Back</span>
-    </NuxtLink>
+    </nuxt-link>
 
     <div
       class="grid grid-cols-1 md:grid-cols-12 gap-40 md:gap-0 mt-40 md:mt-64 md:items-center"

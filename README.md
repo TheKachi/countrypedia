@@ -1,69 +1,54 @@
-# country-api
+# Frontend Mentor - REST Countries API with color theme switcher solution
 
-## Build Setup
+This is a solution to the [REST Countries API with color theme switcher challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/rest-countries-api-with-color-theme-switcher-5cacc469fec04111f7b848ca). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
 
-```bash
-# install dependencies
-$ yarn install
+## Table of contents
 
-# serve with hot reload at localhost:3000
-$ yarn dev
+- [Overview](#overview)
+  - [The challenge](#the-challenge)
+  - [Screenshot](#screenshot)
+  - [Links](#links)
+- [My process](#my-process)
+  - [Built with](#built-with)
+  - [What I learned](#what-i-learned)
+  - [Continued development](#continued-development)
 
-# build for production and launch server
-$ yarn build
-$ yarn start
+## Overview
 
-# generate static project
-$ yarn generate
-```
+### The challenge
 
-For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
+Users should be able to:
 
-## Special Directories
+- See all countries from the API on the homepage
+- Search for a country using an `input` field
+- Filter countries by region
+- Click on a country to see more detailed information on a separate page
+- Click through to the border countries on the detail page
+- Toggle the color scheme between light and dark mode _(optional)_
 
-You can create the following extra directories, some of which have special behaviors. Only `pages` is required; you can delete them if you don't want to use their functionality.
+### Screenshot
 
-### `assets`
+![](https://res.cloudinary.com/thekachi/image/upload/v1647533832/Screen_Shot_2022-03-17_at_5.13.58_PM_zm7r2b.png)
 
-The assets directory contains your uncompiled assets such as Stylus or Sass files, images, or fonts.
+### Links
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/assets).
+- Solution URL: [Github Repo](https://github.com/TheKachi/countrypedia)
+- Live Site URL: [Vercel site](https://country-api-wine.vercel.app)
 
-### `components`
+## My process
 
-The components directory contains your Vue.js components. Components make up the different parts of your page and can be reused and imported into your pages, layouts and even other components.
+### Built with
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/components).
+- Semantic HTML5 markup
+- [Vue JS](https://v2.vuejs.org/) - JS library
+- [Nuxt JS](https://nuxjs.org/) - React framework
+- [Tailwind](https://tailwindcss.com/) - For styles
+- [Axios](https://axios.com/) - For REST APIs
 
-### `layouts`
+### What I learned
 
-Layouts are a great help when you want to change the look and feel of your Nuxt app, whether you want to include a sidebar or have distinct layouts for mobile and desktop.
+Building this out helped reinforce my knowledge of Vue hand in hand with all the other tools listed. It also helped me practise and understand how filtering and searching works.
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/layouts).
+### Continued development
 
-
-### `pages`
-
-This directory contains your application views and routes. Nuxt will read all the `*.vue` files inside this directory and setup Vue Router automatically.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/get-started/routing).
-
-### `plugins`
-
-The plugins directory contains JavaScript plugins that you want to run before instantiating the root Vue.js Application. This is the place to add Vue plugins and to inject functions or constants. Every time you need to use `Vue.use()`, you should create a file in `plugins/` and add its path to plugins in `nuxt.config.js`.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/plugins).
-
-### `static`
-
-This directory contains your static files. Each file inside this directory is mapped to `/`.
-
-Example: `/static/robots.txt` is mapped as `/robots.txt`.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/static).
-
-### `store`
-
-This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
+Although this is a completed and efficient solution I probably would refactor later by adding state management with Vuex.

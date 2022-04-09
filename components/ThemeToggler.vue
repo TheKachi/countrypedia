@@ -2,7 +2,6 @@
   <button
     role="button"
     tabindex="0"
-    aria-pressed="false"
     aria-label="Toggle dark and light mode"
     @click.prevent="toggleTheme"
     class="text-black dark:text-white font-semibold"
@@ -13,7 +12,6 @@
   <button
     role="button"
     tabindex="0"
-    aria-pressed="false"
     aria-label="Toggle dark and light mode"
     @click.prevent="toggleTheme"
     class="text-black dark:text-white font-semibold"

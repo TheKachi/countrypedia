@@ -40,7 +40,7 @@
       <div
         class="grid lg:grid-cols-4 2xl:grid-cols-5 gap-40 lg:gap-64 px-28 lg:px-0"
       >
-        <div class="" v-for="(country, i) in filteredCountries" :key="i" v-once>
+        <div class="" v-for="(country, i) in filteredCountries" :key="i">
           <CountryCard :country="country" />
         </div>
       </div>
@@ -110,12 +110,12 @@ export default {
   computed: {
     filteredCountries() {
       // All countries
-      let display = this.countries;
+      let countries = this.countries;
 
       // Search
       if (this.searchQuery !== "") {
         const searchRegex = new RegExp(this.searchQuery, "i");
-        display = display.filter(
+        countries = countries.filter(
           (country) =>
             searchRegex.test(country.name) || searchRegex.test(country.capital)
         );
@@ -123,9 +123,9 @@ export default {
 
       // Filter
       if (this.region !== "")
-        return display.filter((country) => country.region === this.region);
-
-      return display;
+        return countries.filter((country) => country.region === this.region);
+      // if (this.region === "All") return countries;
+      // return countries;
     },
   },
 };
